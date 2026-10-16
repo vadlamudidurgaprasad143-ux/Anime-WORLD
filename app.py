@@ -11,6 +11,7 @@ from werkzeug.security import (
     generate_password_hash,
     check_password_hash
 )
+import random
 
 from models import db, User
 
@@ -46,7 +47,7 @@ with app.app_context():
     db.create_all()
 
 # ==========================
-# HOME
+# HOME & AUTHENTICATED ROUTES
 # ==========================
 @app.route("/")
 def home():
@@ -55,32 +56,38 @@ def home():
     return redirect(url_for("login"))
 
 # ==========================
-# DORAEMON SHOW PAGE
+# ANIME & CARTOON SHOW PAGES
 # ==========================
-@app.route("/doraemon")
+@app.route("/naruto")
 @login_required
-def doraemon():
-    return render_template("doraemon.html")
+def naruto():
+    return render_template("naruto.html")
 
-# ==========================
-# DEMON SLAYER SHOW PAGE
-# ==========================
+@app.route("/pokemon")
+@login_required
+def pokemon():
+    return render_template("pokemon.html")
+
+@app.route("/sololeveling")
+@login_required
+def solo_leveling():
+    return render_template("sololeveling.html")
+
 @app.route("/demonslayer")
 @login_required
 def demon_slayer():
     return render_template("demon_slayer.html")
 
-# ==========================
-# SOLO LEVELING SHOW PAGE
-# ==========================
-@app.route("/sololeveling")
+@app.route("/jujutsukaisen")
 @login_required
-def solo_leveling():
-    return render_template("solo_leveling.html")
+def jujutsu_kaisen():
+    return render_template("jujutsukaisen.html")
 
-# ==========================
-# SHINCHAN SHOW PAGE
-# ==========================
+@app.route("/doraemon")
+@login_required
+def doraemon():
+    return render_template("doraemon.html")
+
 @app.route("/shinchan")
 @login_required
 def shinchan():
@@ -98,10 +105,8 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        # Find user using SQLAlchemy 2.0 syntax
         user = db.session.scalar(db.select(User).where(User.username == username))
 
-        # Check user and password
         if user and check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for("home"))
@@ -125,16 +130,19 @@ def signup():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
 
-        # Check existing username
+        # 1. Check if passwords match
+        if password != confirm_password:
+            return render_template("signup.html", error="Passwords do not match!")
+
+        # 2. Check if username already exists
         existing_user = db.session.scalar(db.select(User).where(User.username == username))
         if existing_user:
-            return render_template("login.html", error="Username already exists!")
+            return render_template("signup.html", error="Username already exists!")
 
-        # Hash password
+        # 3. Hash password and save new user
         hashed_password = generate_password_hash(password)
-
-        # Create user
         user = User(
             username=username,
             password=hashed_password
@@ -143,11 +151,38 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        # Automatically log in after successful sign up
         login_user(user)
         return redirect(url_for("home"))
 
-    return render_template("login.html")
+    return render_template("signup.html")
+
+# ==========================
+# REAL USER GOOGLE CONNECTION SIMULATION
+# ==========================
+@app.route("/google-login")
+def google_login():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
+    
+    # Connect/simulate an authenticated Google profile session dynamically
+    # (Generates a unique profile name every time, or map to a persistent session email)
+    google_user_email = f"google_user_{random.randint(1000, 9999)}@gmail.com"
+    
+    # Check if this user exists, if not create them seamlessly
+    user = db.session.scalar(db.select(User).where(User.username == google_user_email))
+    
+    if not user:
+        hashed_password = generate_password_hash("google_oauth_secure_pass")
+        user = User(
+            username=google_user_email,
+            password=hashed_password
+        )
+        db.session.add(user)
+        db.session.commit()
+    
+    # Automatically log them into the system
+    login_user(user)
+    return redirect(url_for("home"))
 
 # ==========================
 # LOGOUT
