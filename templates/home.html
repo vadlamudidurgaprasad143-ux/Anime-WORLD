@@ -64,6 +64,7 @@
             transition: all 0.3s ease;
             position: relative;
             padding: 5px 0;
+            cursor: pointer;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -99,22 +100,136 @@
             box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
         }
 
+        /* Hero Carousel Section - 85% Width */
+        .hero-carousel {
+            position: relative;
+            max-width: 1200px;
+            margin: 25px auto 10px auto;
+            width: 85%;
+            height: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #040812;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #040812;
+            filter: brightness(0.9);
+        }
+
+        /* Carousel Side Caption Overlay */
+        .carousel-caption {
+            position: absolute;
+            left: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(5, 10, 20, 0.82);
+            padding: 20px 28px;
+            border-radius: 14px;
+            border-left: 4px solid #00d4ff;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            max-width: 290px;
+        }
+
+        .carousel-caption h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .carousel-caption a {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff 0%, #0072ff 100%);
+            color: #ffffff;
+            padding: 9px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-caption a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        }
+
+        /* Carousel Navigation Buttons */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(5, 10, 20, 0.7);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            font-size: 16px;
+            padding: 12px 15px;
+            cursor: pointer;
+            z-index: 20;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: #00d4ff;
+            color: #040812;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
+
         /* Main Container */
         .container {
-            padding: 40px 60px;
+            padding: 20px 60px 40px 60px;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
         }
 
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
         .section-title {
             font-size: 28px;
             font-weight: 800;
-            margin-bottom: 30px;
             color: #ffffff;
             display: flex;
             align-items: center;
             gap: 12px;
+            margin-bottom: 0;
         }
 
         .section-title i {
@@ -122,14 +237,63 @@
             font-size: 22px;
         }
 
-        /* Anime Poster Cards Grid */
-        .poster-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
+        /* Live Search Bar Styling */
+        .search-container {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            background-color: #0f172a;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-container input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.3), inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a99ad;
+            font-size: 16px;
+        }
+
+        /* Trending Cards Flex Slider Section */
+        .trending-slider-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .poster-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 5px;
+            scrollbar-width: none;
+        }
+
+        .poster-slider::-webkit-scrollbar {
+            display: none;
         }
 
         .poster-card {
+            min-width: 200px;
+            max-width: 200px;
+            flex-shrink: 0;
             border-radius: 14px;
             overflow: hidden;
             background: #0f172a;
@@ -171,12 +335,86 @@
             letter-spacing: 0.5px;
         }
 
+        /* Trending Slider Nav Buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(5, 10, 20, 0.85);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            background: #00d4ff;
+            color: #040812;
+            box-shadow: 0 0 12px #00d4ff;
+        }
+
+        .slider-btn-left { left: -20px; }
+        .slider-btn-right { right: -20px; }
+
+        /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 20px; }
-            .container { padding: 20px; }
-            .poster-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
                 gap: 15px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                width: 100%;
+            }
+
+            .hero-carousel {
+                width: 95%;
+                height: 240px;
+                margin: 15px auto;
+            }
+
+            .carousel-caption {
+                left: 55px;
+                padding: 10px 14px;
+                max-width: 170px;
+            }
+
+            .carousel-caption h2 {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .container {
+                padding: 15px 20px;
+            }
+
+            .search-container {
+                width: 100%;
+            }
+
+            .poster-card {
+                min-width: 150px;
+                max-width: 150px;
+            }
+
+            .slider-btn-left {
+                left: 5px;
+            }
+
+            .slider-btn-right {
+                right: 5px;
             }
         }
     </style>
@@ -191,67 +429,220 @@
         </div>
         
         <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">Series</a>
-            <a href="#">Movies</a>
-            <a href="#">Anime</a>
-            <a href="#">Cartoons</a>
+            <a href="#" onclick="filterCategory('all', event)" class="active" id="nav-home">Home</a>
+            <a href="#" onclick="filterCategory('movies', event)" id="nav-movies">Movies</a>
+            <a href="#" onclick="filterCategory('anime', event)" id="nav-anime">Anime</a>
+            <a href="#" onclick="filterCategory('cartoons', event)" id="nav-cartoons">Cartoons</a>
         </div>
 
         <div class="user-auth">
-            <a href="/logout">Logout</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
         </div>
+    </div>
+
+    <!-- Hero Slideshow Carousel -->
+    <div class="hero-carousel">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Slide 1: Naruto -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/naruto.jpg') }}" alt="Naruto">
+                <div class="carousel-caption">
+                    <h2>Naruto</h2>
+                    <a href="{{ url_for('naruto') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 2: Pokémon -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/pokemon.jpg') }}" alt="Pokémon">
+                <div class="carousel-caption">
+                    <h2>Pokémon</h2>
+                    <a href="{{ url_for('pokemon') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 3: Solo Leveling -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/sololeveling.jpg') }}" alt="Solo Leveling">
+                <div class="carousel-caption">
+                    <h2>Solo Leveling</h2>
+                    <a href="{{ url_for('solo_leveling') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 4: Demon Slayer -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/demonslayer.jpg') }}" alt="Demon Slayer">
+                <div class="carousel-caption">
+                    <h2>Demon Slayer</h2>
+                    <a href="{{ url_for('demon_slayer') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 5: Jujutsu Kaisen -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/jujutsukaisen.jpg') }}" alt="Jujutsu Kaisen">
+                <div class="carousel-caption">
+                    <h2>Jujutsu Kaisen</h2>
+                    <a href="{{ url_for('jujutsu_kaisen') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 6: Doraemon -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/doraemon.jpg') }}" alt="Doraemon">
+                <div class="carousel-caption">
+                    <h2>Doraemon</h2>
+                    <a href="{{ url_for('doraemon') }}">Watch Now</a>
+                </div>
+            </div>
+            <!-- Slide 7: Shinchan -->
+            <div class="carousel-slide">
+                <img src="{{ url_for('static', filename='image/Shinchan.jpg') }}" alt="Shinchan">
+                <div class="carousel-caption">
+                    <h2>Shinchan</h2>
+                    <a href="{{ url_for('shinchan') }}">Watch Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Carousel Controls -->
+        <button class="carousel-btn prev-btn" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="carousel-btn next-btn" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
     <!-- Main Container -->
     <div class="container">
-        <h2 class="section-title">
-            <i class="fa-solid fa-fire"></i>
-            Trending Shows
-        </h2>
-
-        <!-- Clickable Poster Cards Section -->
-        <div class="poster-grid">
-            <a href="#" class="poster-card">
-                <img src="{{ url_for('static', filename='image/naruto.jpg') }}" alt="Naruto">
-                <div class="poster-title">Naruto</div>
-            </a>
-
-            <a href="#" class="poster-card">
-                <img src="{{ url_for('static', filename='image/pokemon.jpg') }}" alt="Pokémon">
-                <div class="poster-title">Pokémon</div>
-            </a>
-
-            <!-- Solo Leveling Card -->
-            <a href="{{ url_for('solo_leveling') }}" class="poster-card">
-                <img src="{{ url_for('static', filename='image/sololeveling.jpg') }}" alt="Solo Leveling">
-                <div class="poster-title">Solo Leveling</div>
-            </a>
+        <div class="header-flex">
+            <h2 class="section-title">
+                <i class="fa-solid fa-fire"></i>
+                Trending Shows
+            </h2>
             
-            <!-- Demon Slayer Card -->
-            <a href="{{ url_for('demon_slayer') }}" class="poster-card">
-                <img src="{{ url_for('static', filename='image/demonslayer.jpg') }}" alt="Demon Slayer">
-                <div class="poster-title">Demon Slayer</div>
-            </a>
+            <!-- Live Search Bar -->
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search anime or cartoons..." onkeyup="filterShows()">
+            </div>
+        </div>
 
-            <a href="#" class="poster-card">
-                <img src="{{ url_for('static', filename='image/jujutsukaisen.jpg') }}" alt="Jujutsu Kaisen">
-                <div class="poster-title">Jujutsu Kaisen</div>
-            </a>
-            
-            <!-- Doraemon Card -->
-            <a href="{{ url_for('doraemon') }}" class="poster-card">
-                <img src="{{ url_for('static', filename='image/doraemon.jpg') }}" alt="Doraemon">
-                <div class="poster-title">Doraemon</div>
-            </a>
+        <!-- Horizontal Flex Slider for Cards with Category Attributes -->
+        <div class="trending-slider-wrapper">
+            <button class="slider-btn slider-btn-left" onclick="scrollTrending(-1)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-            <!-- Shinchan Card -->
-            <a href="{{ url_for('shinchan') }}" class="poster-card">
-                <img src="{{ url_for('static', filename='image/Shinchan.jpg') }}" alt="Shinchan">
-                <div class="poster-title">Shinchan</div>
-            </a>
+            <div class="poster-slider" id="posterSlider">
+                <!-- Anime Category -->
+                <a href="{{ url_for('naruto') }}" class="poster-card" data-title="naruto" data-category="anime">
+                    <img src="{{ url_for('static', filename='image/naruto.jpg') }}" alt="Naruto">
+                    <div class="poster-title">Naruto</div>
+                </a>
+
+                <!-- Cartoons Category -->
+                <a href="{{ url_for('pokemon') }}" class="poster-card" data-title="pokemon" data-category="cartoons">
+                    <img src="{{ url_for('static', filename='image/pokemon.jpg') }}" alt="Pokémon">
+                    <div class="poster-title">Pokémon</div>
+                </a>
+
+                <!-- Anime Category -->
+                <a href="{{ url_for('solo_leveling') }}" class="poster-card" data-title="solo leveling" data-category="anime">
+                    <img src="{{ url_for('static', filename='image/sololeveling.jpg') }}" alt="Solo Leveling">
+                    <div class="poster-title">Solo Leveling</div>
+                </a>
+                
+                <!-- Anime Category -->
+                <a href="{{ url_for('demon_slayer') }}" class="poster-card" data-title="demon slayer" data-category="anime">
+                    <img src="{{ url_for('static', filename='image/demonslayer.jpg') }}" alt="Demon Slayer">
+                    <div class="poster-title">Demon Slayer</div>
+                </a>
+
+                <!-- Anime Category -->
+                <a href="{{ url_for('jujutsu_kaisen') }}" class="poster-card" data-title="jujutsu kaisen" data-category="anime">
+                    <img src="{{ url_for('static', filename='image/jujutsukaisen.jpg') }}" alt="Jujutsu Kaisen">
+                    <div class="poster-title">Jujutsu Kaisen</div>
+                </a>
+                
+                <!-- Cartoons Category -->
+                <a href="{{ url_for('doraemon') }}" class="poster-card" data-title="doraemon" data-category="cartoons">
+                    <img src="{{ url_for('static', filename='image/doraemon.jpg') }}" alt="Doraemon">
+                    <div class="poster-title">Doraemon</div>
+                </a>
+
+                <!-- Cartoons Category -->
+                <a href="{{ url_for('shinchan') }}" class="poster-card" data-title="shinchan" data-category="cartoons">
+                    <img src="{{ url_for('static', filename='image/Shinchan.jpg') }}" alt="Shinchan">
+                    <div class="poster-title">Shinchan</div>
+                </a>
+            </div>
+
+            <button class="slider-btn slider-btn-right" onclick="scrollTrending(1)">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Hero Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Auto-slide every 4 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 4000);
+
+        // Trending Shows Horizontal Scroll Logic
+        function scrollTrending(direction) {
+            const slider = document.getElementById('posterSlider');
+            const scrollAmount = 240 * direction;
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        // Category Filter Logic
+        function filterCategory(category, event) {
+            if(event) event.preventDefault();
+            
+            // Active class update
+            let navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            if(event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            let cards = document.getElementsByClassName('poster-card');
+            for (let i = 0; i < cards.length; i++) {
+                let cardCategory = cards[i].getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Live Search Filter Logic
+        function filterShows() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('poster-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getAttribute('data-title');
+                if (title.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
